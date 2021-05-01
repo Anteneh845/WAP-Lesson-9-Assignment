@@ -25,24 +25,32 @@ class LinkedList {
     }
 
     remove(item) {
-        if (this.head === null || this.head) {
-            let current = this.head;
-            while (current) {
-                if (current.value === item) {
-                    current = current.next;
-                    break;
+        let current = this;
+        let prev = null;
+
+        while (current) {
+            if (current.value === item) {
+                if (prev == null) {
+                    this.value = current.next.value;
+                    this.next = current.next.next;
+                } else {
+                    prev.next = current.next;
                 }
+                return true;
             }
+            prev = current;
+            current = current.next;
         }
     }
 
     print() {
         let current = this.head;
-        let nodes = "{ ";
+        let nodes = "LinkedList { ";
         while (current) {
-            nodes = current.value + " "
+            nodes += current.value + " "
+            current = current.next;
         }
-        nodes += " }";
+        nodes += "}";
         console.log(nodes);
     }
 }
